@@ -180,7 +180,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .empty{text-align:center;color:var(--muted);padding:32px 16px;font-size:0.86rem}
 .empty .big{font-size:2rem;margin-bottom:8px}
 
-/* SELECTION ENTRY — punter view */
+/* SELECTION ENTRY Â— punter view */
 .punter-select-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
 .psc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .psc-name{font-family:'Oswald',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--yellow)}
@@ -207,7 +207,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="login-box">
     <div class="login-title">? ADMIN</div>
     <div class="login-sub">Enter the admin password</div>
-    <input class="login-input" id="pwInput" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPw()">
+    <input class="login-input" id="pwInput" type="password" placeholder="Â•Â•Â•Â•Â•Â•" onkeydown="if(event.key==='Enter')checkPw()">
     <button class="btn btn-purple" onclick="checkPw()">UNLOCK</button>
     <div class="login-err" id="loginErr"></div>
     <button class="btn btn-outline" style="margin-top:8px" onclick="closeLogin()">Cancel</button>
@@ -290,7 +290,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
       </div>
     </div>
     <button class="btn btn-purple" onclick="createMeet()">CREATE NEW MEET</button>
-    <div style="margin-top:8px;font-size:0.72rem;color:var(--muted);text-align:center">Creates a fresh meet — previous meets are kept in history</div>
+    <div style="margin-top:8px;font-size:0.72rem;color:var(--muted);text-align:center">Creates a fresh meet Â— previous meets are kept in history</div>
   </div>
 
   <!-- TAB Fetch -->
@@ -595,7 +595,7 @@ function renderRaces() {
         <div class="punter-name">${punter}</div>
         <div class="selection-box">${horseDisplay}</div>
         <div></div>
-        <div class="return-val ${retClass}">${ret>0?'$'+ret.toFixed(2):race.resulted?'-':'—'}</div>
+        <div class="return-val ${retClass}">${ret>0?'$'+ret.toFixed(2):race.resulted?'-':'Â—'}</div>
       </div>`;
     }).join('');
 
@@ -667,12 +667,12 @@ function renderScores() {
     const rr = calcRaceReturns(race);
     if (!race.resulted) return '';
     return `<div class="payment-card">
-      <div class="payment-title">RACE ${race.num}${race.name?' — '+race.name:''}</div>
+      <div class="payment-title">RACE ${race.num}${race.name?' Â— '+race.name:''}</div>
       ${STATE.punters.map(p=>{
         const sel = (race.selections||[]).find(s=>s.punter===p);
         const ret = rr[p]||0;
         return `<div class="payment-row">
-          <span>${p}${sel?` — #${sel.horse}${sel.joker?' ?':''}`:' (no pick)'}</span>
+          <span>${p}${sel?` Â— #${sel.horse}${sel.joker?' ?':''}`:' (no pick)'}</span>
           <span class="amt ${ret>0?'pos':'nil'}">${ret>0?'$'+ret.toFixed(2):'-'}</span>
         </div>`;
       }).join('')}
@@ -697,13 +697,13 @@ function renderPayments() {
     } else {
       const rules = STATE.rules;
       wpEl.innerHTML = `<div class="payment-card">
-        <div class="payment-title">? ${wp.winner.toUpperCase()} WINS — $${wp.winAmt.toFixed(2)}</div>
+        <div class="payment-title">? ${wp.winner.toUpperCase()} WINS Â— $${wp.winAmt.toFixed(2)}</div>
         <div class="payment-row"><span>Payment per loser</span><span class="amt pos">$${wp.payEach}</span></div>
         ${wp.payments.map(p=>`<div class="payment-row"><span>${p.from} ? ${p.to}</span><span class="amt neg">-$${p.amt}</span></div>`).join('')}
         <div class="payment-row" style="margin-top:4px;font-weight:700"><span>${wp.winner} receives</span><span class="amt pos">+$${wp.payEach*(STATE.punters.length-1)}</span></div>
       </div>
       <div style="font-size:0.75rem;color:var(--muted);text-align:center;margin-bottom:12px">
-        ${wp.winAmt>parseFloat(rules.threshold)?`? Bonus threshold exceeded ($${rules.threshold}) — each loser pays $${rules.bonus}`:`Standard win — each loser pays $${rules.win}`}
+        ${wp.winAmt>parseFloat(rules.threshold)?`? Bonus threshold exceeded ($${rules.threshold}) Â— each loser pays $${rules.bonus}`:`Standard win Â— each loser pays $${rules.win}`}
       </div>`;
     }
   }
@@ -760,7 +760,7 @@ function renderAdmin() {
 
   // Result race select
   const rr = document.getElementById('resultRace');
-  rr.innerHTML = (meet?.races||[]).map(r=>`<option value="${r.num}">Race ${r.num}${r.name?' — '+r.name:''}</option>`).join('');
+  rr.innerHTML = (meet?.races||[]).map(r=>`<option value="${r.num}">Race ${r.num}${r.name?' Â— '+r.name:''}</option>`).join('');
   loadResultForm();
 
   // Rules
@@ -889,7 +889,7 @@ function openSelectionEntry(meetId, raceNum, punter) {
   modal.id = 'selModal';
   modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px';
   modal.innerHTML = `<div style="background:#060010;border:1px solid #4C1D95;border-radius:12px;padding:20px;width:100%;max-width:400px">
-    <div style="font-family:Oswald,sans-serif;font-size:1.3rem;letter-spacing:2px;color:#A78BFA;margin-bottom:4px">RACE ${raceNum} — ${punter.toUpperCase()}</div>
+    <div style="font-family:Oswald,sans-serif;font-size:1.3rem;letter-spacing:2px;color:#A78BFA;margin-bottom:4px">RACE ${raceNum} Â— ${punter.toUpperCase()}</div>
     <div style="font-size:0.72rem;color:var(--muted);margin-bottom:14px">${meet.name}</div>
     ${runnerHtml}
     <div class="form-group" style="margin-top:12px">
@@ -1010,7 +1010,7 @@ async function fetchTabRace() {
     // Try to extract runner numbers and names from TAB page
     const runners = parseTabRunners(html);
     if (runners.length) {
-      statusEl.textContent = `Found ${runners.length} runners — tap to assign to a race`; statusEl.className='fetch-status ok';
+      statusEl.textContent = `Found ${runners.length} runners Â— tap to assign to a race`; statusEl.className='fetch-status ok';
       runnersEl.innerHTML = `<div class="form-group" style="margin-top:10px">
         <label class="form-label">Assign to Race</label>
         <select class="form-select" id="assignRace">${(activeMeet()?.races||[]).map(r=>`<option value="${r.num}">Race ${r.num}</option>`).join('')}</select>
@@ -1019,10 +1019,10 @@ async function fetchTabRace() {
       <button class="btn btn-purple" style="margin-top:10px" onclick="assignFetchedRunners(${JSON.stringify(runners).replace(/"/g,'&quot;')})">ASSIGN TO RACE</button>`;
       window._fetchedRunners = runners;
     } else {
-      statusEl.textContent = 'Could not parse runners — enter manually below'; statusEl.className='fetch-status err';
+      statusEl.textContent = 'Could not parse runners Â— enter manually below'; statusEl.className='fetch-status err';
     }
   } catch(e) {
-    statusEl.textContent = 'Fetch failed — TAB may block this. Enter manually.'; statusEl.className='fetch-status err';
+    statusEl.textContent = 'Fetch failed Â— TAB may block this. Enter manually.'; statusEl.className='fetch-status err';
   }
 }
 
